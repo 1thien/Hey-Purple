@@ -7,11 +7,11 @@ Christopher Diu
 
 #### Your section leader's name
 
-TODO
+Mathew Kuruvilla
 
 #### Project title
 
-TODO
+Hey Purple
 
 ***
 
@@ -19,12 +19,13 @@ Short answers for the below questions suffice. If you want to alter your plan fo
 
 #### What have you done for your project so far?
 
-TODO
+Completed a function for Purple to recognize the user's voice and respond back to the user.
 
 #### What have you not done for your project yet?
 
-TODO
+We haven't taught Purple how to respond to human commands. Purple is unable to perform tasks yet. After we figure that out, we are hoping to create a mini-interactive game with Purple.
 
 #### What problems, if any, have you encountered?
 
-TODO
+We were having issues figuring out how to program a function that tells Purple how to answer simple questions or perform specific commands such as telling the user what time is it
+and how the weather is today. 
