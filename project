@@ -2,7 +2,6 @@ import speech_recognition as speechr
 import pyttsx3
 import datetime
 import turtle
-import random
 
 listener = speechr.Recognizer()  #Uses speech recognition and applies it to 'listener'
 TTS = pyttsx3.init() #Applys the text to speech
@@ -23,7 +22,7 @@ def my_order():
 
 #TIME AND DATE -----------------------------------------------------------------------------------------
 def run_purple():
-    order = my_order() #This is recall the function into the 'order'
+    order = my_order()
 
     if 'time' in order:
         print("24-Hour-Clock")
@@ -45,7 +44,7 @@ def run_purple():
 
 
 
-#ROCK PAPER SCISSORS GAME -----------------------------------------------------------------------------------------
+#ROCK PAPER GAME -----------------------------------------------------------------------------------------
 
     if 'play' in order:
 
@@ -90,7 +89,7 @@ def run_purple():
         main()
 
 
-#CALCULATOR -----------------------------------------------------------------------------------------
+#CALUCLATOR -----------------------------------------------------------------------------------------
     if 'calculator' in order:
 
         print('''                   
@@ -174,98 +173,6 @@ def run_purple():
                 print('PLEASE INPUT ANY OF THE OPTION FROM 1-6')
 
 
+
+
 run_purple()
-
-
-
-
-
-#WORD GUESSING GAME
-
-def get_word():
-    # List of words for the game
-    words = ["apple", "banana", "cherry", "orange", "grape", "kiwi", "melon", "peach", "pear"]
-    return random.choice(words)
-
-def play_game():
-    word = get_word()
-    guessed_word = ["_"] * len(word)
-    attempts = 0
-
-    print("Welcome to the Word Guessing Game!")
-    print("Try to guess the word by speaking one letter at a time.")
-    print("You have 3 attempts for each letter.")
-
-    while "_" in guessed_word:
-        print("Word:", " ".join(guessed_word))
-        print("Attempts remaining:", 3 - attempts)
-        print("Speak a letter:")
-
-        with speechr.Microphone() as audio:
-            recognizer.adjust_for_ambient_noise(source)
-            audio = recognizer.listen(source)
-
-        try:
-            letter = recognizer.recognize_google(audio).lower()
-            if len(letter) == 1 and letter.isalpha():
-                if letter in word:
-                    print(f"Letter '{letter}' is in the word!")
-                    for i in range(len(word)):
-                        if word[i] == letter:
-                            guessed_word[i] = letter
-                else:
-                    print(f"Letter '{letter}' is not in the word.")
-                    attempts += 1
-
-            if attempts == 3:
-                print("You've used all your attempts for this letter. Try another letter.")
-                attempts = 0
-        except:
-            pass
-
-
-    print("Congratulations, you guessed the word!")
-    print("The word was:", word)
-
-if __name__ == "__main__":
-    play_game()
-
-
-
-
-
-
-
-def get_user_guess():
-    recognizer = speechr.Recognizer()
-    microphone = speechr.Microphone()
-
-    while True:
-        print("Guess heads or tails:")
-        with microphone as source:
-            recognizer.adjust_for_ambient_noise(source)
-            audio = recognizer.listen(source)
-
-        try:
-            guess = recognizer.recognize_google(audio).lower()
-            if guess in ['heads', 'tails']:
-                return guess
-            else:
-                print("Please guess heads or tails.")
-        except:
-            pass
-
-def play_coin_flip():
-    choices = ['heads', 'tails']
-    user_guess = get_user_guess()
-    coin_flip_result = random.choice(choices)
-
-    print(f"The coin landed on {coin_flip_result}!")
-
-    if user_guess == coin_flip_result:
-        print("Congratulations, you guessed correctly!")
-    else:
-        print("Sorry, you guessed incorrectly.")
-
-if __name__ == "__main__":
-    play_coin_flip()
