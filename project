@@ -180,7 +180,7 @@ run_purple()
 
 
 
-#WORD GUESSING GAME    
+#WORD GUESSING GAME
 
 def get_word():
     # List of words for the game
@@ -192,9 +192,6 @@ def play_game():
     guessed_word = ["_"] * len(word)
     attempts = 0
 
-    recognizer = speechr.Recognizer()
-    microphone = speechr.Microphone()
-
     print("Welcome to the Word Guessing Game!")
     print("Try to guess the word by speaking one letter at a time.")
     print("You have 3 attempts for each letter.")
@@ -204,7 +201,7 @@ def play_game():
         print("Attempts remaining:", 3 - attempts)
         print("Speak a letter:")
 
-        with speechr.Microphone() as audio::
+        with speechr.Microphone() as audio:
             recognizer.adjust_for_ambient_noise(source)
             audio = recognizer.listen(source)
 
@@ -219,19 +216,56 @@ def play_game():
                 else:
                     print(f"Letter '{letter}' is not in the word.")
                     attempts += 1
-            else:
-                print("Please speak one letter at a time.")
-        except speechr.UnknownValueError:
-            print("Sorry, I could not understand your audio.")
-        except speechr.RequestError as e:
-            print(f"Sorry, there was an error with the request: {e}")
 
-        if attempts == 3:
-            print("You've used all your attempts for this letter. Try another letter.")
-            attempts = 0
+            if attempts == 3:
+                print("You've used all your attempts for this letter. Try another letter.")
+                attempts = 0
+        except:
+            pass
+
 
     print("Congratulations, you guessed the word!")
     print("The word was:", word)
 
 if __name__ == "__main__":
     play_game()
+
+
+
+
+
+
+
+def get_user_guess():
+    recognizer = speechr.Recognizer()
+    microphone = speechr.Microphone()
+
+    while True:
+        print("Guess heads or tails:")
+        with microphone as source:
+            recognizer.adjust_for_ambient_noise(source)
+            audio = recognizer.listen(source)
+
+        try:
+            guess = recognizer.recognize_google(audio).lower()
+            if guess in ['heads', 'tails']:
+                return guess
+            else:
+                print("Please guess heads or tails.")
+        except:
+            pass
+
+def play_coin_flip():
+    choices = ['heads', 'tails']
+    user_guess = get_user_guess()
+    coin_flip_result = random.choice(choices)
+
+    print(f"The coin landed on {coin_flip_result}!")
+
+    if user_guess == coin_flip_result:
+        print("Congratulations, you guessed correctly!")
+    else:
+        print("Sorry, you guessed incorrectly.")
+
+if __name__ == "__main__":
+    play_coin_flip()
