@@ -45,7 +45,7 @@ def run_purple():
 
 
 
-#ROCK PAPER GAME -----------------------------------------------------------------------------------------
+#ROCK PAPER SCISSORS GAME -----------------------------------------------------------------------------------------
 
     if 'play' in order:
 
@@ -90,7 +90,7 @@ def run_purple():
         main()
 
 
-#CALUCLATOR -----------------------------------------------------------------------------------------
+#CALCULATOR -----------------------------------------------------------------------------------------
     if 'calculator' in order:
 
         print('''                   
@@ -180,7 +180,7 @@ run_purple()
 
 
 
-WORD GUESSING GAME    
+#WORD GUESSING GAME    
 
 def get_word():
     # List of words for the game
