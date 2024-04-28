@@ -2,6 +2,7 @@ import speech_recognition as speechr
 import pyttsx3
 import datetime
 import turtle
+import random
 
 listener = speechr.Recognizer()  #Uses speech recognition and applies it to 'listener'
 TTS = pyttsx3.init() #Applys the text to speech
@@ -175,3 +176,62 @@ def run_purple():
 
 run_purple()
 
+
+
+
+
+WORD GUESSING GAME    
+
+def get_word():
+    # List of words for the game
+    words = ["apple", "banana", "cherry", "orange", "grape", "kiwi", "melon", "peach", "pear"]
+    return random.choice(words)
+
+def play_game():
+    word = get_word()
+    guessed_word = ["_"] * len(word)
+    attempts = 0
+
+    recognizer = speechr.Recognizer()
+    microphone = speechr.Microphone()
+
+    print("Welcome to the Word Guessing Game!")
+    print("Try to guess the word by speaking one letter at a time.")
+    print("You have 3 attempts for each letter.")
+
+    while "_" in guessed_word:
+        print("Word:", " ".join(guessed_word))
+        print("Attempts remaining:", 3 - attempts)
+        print("Speak a letter:")
+
+        with speechr.Microphone() as audio::
+            recognizer.adjust_for_ambient_noise(source)
+            audio = recognizer.listen(source)
+
+        try:
+            letter = recognizer.recognize_google(audio).lower()
+            if len(letter) == 1 and letter.isalpha():
+                if letter in word:
+                    print(f"Letter '{letter}' is in the word!")
+                    for i in range(len(word)):
+                        if word[i] == letter:
+                            guessed_word[i] = letter
+                else:
+                    print(f"Letter '{letter}' is not in the word.")
+                    attempts += 1
+            else:
+                print("Please speak one letter at a time.")
+        except speechr.UnknownValueError:
+            print("Sorry, I could not understand your audio.")
+        except speechr.RequestError as e:
+            print(f"Sorry, there was an error with the request: {e}")
+
+        if attempts == 3:
+            print("You've used all your attempts for this letter. Try another letter.")
+            attempts = 0
+
+    print("Congratulations, you guessed the word!")
+    print("The word was:", word)
+
+if __name__ == "__main__":
+    play_game()
