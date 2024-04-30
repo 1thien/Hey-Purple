@@ -1,7 +1,10 @@
 import speech_recognition as speechr
 import pyttsx3
 import datetime
-import turtle
+import random
+import pywhatkit
+
+
 
 listener = speechr.Recognizer()  #Uses speech recognition and applies it to 'listener'
 TTS = pyttsx3.init() #Applys the text to speech
@@ -20,9 +23,10 @@ def my_order():
     return command
 
 
+order = my_order()
+
 #TIME AND DATE -----------------------------------------------------------------------------------------
 def run_purple():
-    order = my_order()
 
     if 'time' in order:
         print("24-Hour-Clock")
@@ -30,23 +34,9 @@ def run_purple():
         print(time)
 
 
+#ROCK PAPER GAME -----------------------------------------------------------------------------------------
 
-
-#DRAWING A SHAPE -----------------------------------------------------------------------------------------
-
-    if 'draw' and 'square' in order:
-
-        bob = turtle.Turtle()
-        wn = turtle.Screen()
-        bob.fd(50)
-
-        wn.exitonclick()
-
-
-
-#ROCK PAPER SCISSORS GAME -----------------------------------------------------------------------------------------
-
-    if 'play' in order:
+    if 'rock' in order:
 
         from random import randrange
 
@@ -89,7 +79,7 @@ def run_purple():
         main()
 
 
-#CALCULATOR -----------------------------------------------------------------------------------------
+#CALUCLATOR -----------------------------------------------------------------------------------------
     if 'calculator' in order:
 
         print('''                   
@@ -172,35 +162,41 @@ def run_purple():
             except ValueError:
                 print('PLEASE INPUT ANY OF THE OPTION FROM 1-6')
 
+#MUSIC---------------------------------------------------------
 
+    if 'listen' in order:
+        song = order
+        pywhatkit.playonyt(song)
+
+#COINGAME------------------------------------------------------
+    if 'heads' in order:
+
+        def coin_flip_guessing_game():
+            print("Welcome to the Coin Flip Guessing Game!")
+            play_again = True
+
+            while play_again:
+                print("I will flip a coin. Guess if it will land on 'heads' or 'tails'.")
+
+                user_guess = input("Enter your guess (heads/tails): ").lower()
+
+                coin_result = random.choice(['heads', 'tails'])
+
+                if user_guess == coin_result:
+                    print(f"The coin landed on {coin_result}. Congratulations, you guessed correctly!")
+                else:
+                    print(f"The coin landed on {coin_result}. Sorry, you guessed incorrectly.")
+
+                play_again_input = input("Do you want to play again? (yes/no): ").lower()
+                play_again = play_again_input == 'yes'
+
+        if __name__ == "__main__":
+            coin_flip_guessing_game()
+
+
+    if 'listen' in order:
+        song = order
+        pywhatkit.playonyt(song)
 
 
 run_purple()
-
-
-
-#COIN FLIP GAME
-
-import random
-
-def coin_flip_guessing_game():
-    print("Welcome to the Coin Flip Guessing Game!")
-    play_again = True
-
-    while play_again:
-        print("I will flip a coin. Guess if it will land on 'heads' or 'tails'.")
-
-        user_guess = input("Enter your guess (heads/tails): ").lower()
-
-        coin_result = random.choice(['heads', 'tails'])
-
-        if user_guess == coin_result:
-            print(f"The coin landed on {coin_result}. Congratulations, you guessed correctly!")
-        else:
-            print(f"The coin landed on {coin_result}. Sorry, you guessed incorrectly.")
-
-        play_again_input = input("Do you want to play again? (yes/no): ").lower()
-        play_again = play_again_input == 'yes'
-
-if __name__ == "__main__":
-    coin_flip_guessing_game()
