@@ -79,7 +79,7 @@ def run_purple():
         main()
 
 
-#CALUCLATOR -----------------------------------------------------------------------------------------
+#CALCULATOR -----------------------------------------------------------------------------------------
     if 'calculator' in order:
 
         print('''                   
@@ -192,11 +192,7 @@ def run_purple():
 
         if __name__ == "__main__":
             coin_flip_guessing_game()
-
-
-    if 'listen' in order:
-        song = order
-        pywhatkit.playonyt(song)
+            
 
 
 run_purple()
